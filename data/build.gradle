@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+
+def ext = rootProject.extensions.getByName("ext")
+android {
+    compileSdkVersion ext.getAt("Android_CompileSdkVersion")
+    buildToolsVersion ext.getAt("Android_BuildToolVersion")
+
+    defaultConfig {
+        minSdkVersion ext.getAt("Android_minSdkVersion")
+        targetSdkVersion ext.getAt("Android_TargetSdkversion")
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile ext.testDependence.junit
+    compile ext.domainDependence.rxJava2
+    compile ext.domainDependence.rxAndroid
+    compile ext.domainDependence.rxtrofit2
+    compile ext.domainDependence.rxtrofit2AdapterRxJava2
+    compile ext.domainDependence.rxtrofit2ConvertGson
+}
